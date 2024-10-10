@@ -1,0 +1,5 @@
+# Define the app service plan name 
+appserviceplan_name=myplan
+
+# Create an app service plan with sku standard 1
+az appservice plan create --resource-group $resource_group_name --name $appserviceplan_name --sku S1

@@ -1,0 +1,11 @@
+topic_name=topic$storage_name
+subscrition_name=subscription$storage_name
+# Retrieve the function app key for the Event Grids trigger endpoint
+function_key=$(az functionapp keys list -g $resource_group_name -n $functionapp_name --query "systemKeys.eventgrid_extension" -o tsv)
+
+# Create the topic for the storage account
+topic_id=$(az eventgrid system-topic create --resource-group $resource_group_name --name $topic_name --location $location --topic-type microsoft.storage.storageaccounts --source $storage_id --query id --output tsv)
+
+# Create the event subscription for the storage account
+function_url="https://${functionapp_name}.azurewebsites.net/runtime/webhooks/EventGrid?functionName=BlobRecover&code=${function_key}"
+az eventgrid event-subscription create --name $subscrition_name --source-resource-id $storage_id --endpoint $function_url --included-event-types Microsoft.Storage.BlobDeleted

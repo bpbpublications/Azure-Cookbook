@@ -1,0 +1,2 @@
+# Create a deployment slot called "staging"
+az webapp deployment slot create --name $appservice_name --resource-group $resource_group_name --slot staging --query "{SlotUrl:join('',['https://',defaultHostName])}" -o table

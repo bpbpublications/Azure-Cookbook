@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "allowedSkus": {
+      "type": "Array",
+      "allowedValues": [
+        "Free",
+        "Shared",
+        "Basic",
+        "Standard",
+        "Premium",
+        "PremiumV2",
+        "PremiumV3"
+      ],
+      "defaultValue": [
+        "Free"
+      ],
+      "metadata": {
+        "displayName": "Allowed skus",
+        "description": "The list of skus can be used for the App Service plan"
+      }
+    },
+    "effect" : {
+      "type": "String",
+      "allowedValues": [
+        "deny",
+        "audit"
+      ],
+      "defaultValue": "deny",
+      "metadata": {
+        "displayName": "Effect",
+        "description": "The effect of the policy"
+      }
+    }
+  },
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "equals": "Microsoft.Web/serverfarms"
+        },
+        {
+          "not": {
+            "field": "Microsoft.Web/serverfarms/sku.tier",
+            "in": "[parameters('allowedSkus')]"
+          }
+        }
+      ]
+    },
+    "then": {
+      "effect": "[parameters('effect')]"
+    }
+  }
+}

@@ -1,0 +1,3 @@
+dos2unix CreateEnvironment.sh
+
+sh CreateEnvironment.sh

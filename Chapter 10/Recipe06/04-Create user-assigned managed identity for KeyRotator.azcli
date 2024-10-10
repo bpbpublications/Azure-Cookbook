@@ -1,0 +1,17 @@
+# Retrieve the resource ID for the resource group and save it in a variable
+resource_group_id=$(az group show --name Recipe10-06-rg --query id --output tsv)
+
+# Create the managed identity
+managed_identity_clientid=$(az identity create --name "AzureCookbookKeyRotatorMI" --resource-group Recipe10-06-rg --query clientId -o tsv)
+
+# Retrieve the managed identity resource id and save it in a variable
+managed_identity_id=$(az identity show --name "AzureCookbookKeyRotatorMI" --resource-group Recipe10-06-rg --query id -o tsv)
+
+# Assign the user-assigned managed identity to the function app
+az functionapp identity assign --name $functionapp_name --resource-group Recipe10-06-rg --identities $managed_identity_id -o none
+
+# Assign the role contributor to the managed identity in the resource group
+az role assignment create --role "Contributor" --assignee $managed_identity_clientid --scope $resource_group_id
+
+# Display the management identity client id
+echo "clientId = $managed_identity_clientid"

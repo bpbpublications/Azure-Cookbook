@@ -1,0 +1,26 @@
+# Define resource names and location
+resource_group_name="Recipe01-01-rg"
+primaryLocation="northeurope"
+secondaryLocation="westus"
+res_suffix=$RANDOM
+primaryStorage_name=primarystorage$res_suffix
+primaryContainer_name='sourcecontainer'
+secondaryStorage_name=secondarystorage$res_suffix
+secondaryContainer_name='destinationcontainer'
+
+# Create resource group
+az group create --name $resource_group_name --location $primaryLocation --query "{ResourceGroup:name}" -o table
+	
+# Create Primary Storage Account
+az storage account create --name $primaryStorage_name --resource-group $resource_group_name --location $primaryLocation --sku Standard_LRS --only-show-errors --query "{PrimaryStorageName:name}" -o table
+
+# Create the source container in the primary Storage Account
+primaryAccountKey=$(az storage account keys list --account-name $primaryStorage_name --query "[0].value" --output tsv)
+az storage container create --name $primaryContainer_name --account-name $primaryStorage_name --account-key $primaryAccountKey --only-show-errors -o none
+
+# Create Secondary Storage Account
+az storage account create --name $secondaryStorage_name --resource-group $resource_group_name --location $secondaryLocation --sku Standard_LRS --only-show-errors --query "{SecondaryStorageName:name}" -o table
+
+# Create the destination container in the secondary Storage Account
+secondaryAccountKey=$(az storage account keys list --account-name $secondaryStorage_name --query "[0].value" --output tsv)
+az storage container create --name $secondaryContainer_name --account-name $secondaryStorage_name --account-key $secondaryAccountKey --only-show-errors -o none

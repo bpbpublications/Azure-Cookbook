@@ -1,0 +1,9 @@
+az login 
+
+az acr login --name <acr login server>
+
+docker build -f .\Dockerfile -t <acr login server>/recipe05-02-app:v1.0 .
+
+docker images
+
+docker push <acr login server>/recipe05-02-app:v1.0

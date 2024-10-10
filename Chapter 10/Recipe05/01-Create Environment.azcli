@@ -1,0 +1,13 @@
+# Define resource names and location
+resource_group_name="Recipe10-05-rg"
+location="northeurope"
+keyvault_name=myKV$RANDOM
+
+# Create resource group
+az group create --name $resource_group_name --location $location
+	
+# Create Key Vault with Access policy enabled
+az keyvault create --name $keyvault_name --resource-group $resource_group_name --sku standard --enable-rbac-authorization false
+
+# Generate a new key
+az keyvault key create --vault-name $keyvault_name --name myEncKey --kty RSA --size 2048 --expires $(date -d "+90 days" '+%Y-%m-%dT%H:%M:%SZ') 

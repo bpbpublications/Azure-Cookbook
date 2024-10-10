@@ -1,0 +1,6 @@
+# Retrieve Resource Group resourceID
+resource_group_id=$(az group show --name $resource_group_name --query "id" --output tsv)
+# Retrieve the role ID (keep attention to the case sensitive)
+role_id=$(az role definition list --name "Custom Storage Blob Data Reader" --query "[0].name" --output tsv)
+# Assign the role to the user on the resource group
+az role assignment create --assignee $user_principal_name --role $role_id --scope $resource_group_id

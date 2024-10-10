@@ -1,0 +1,1 @@
+az deployment group create --name BingChatDeployment --resource-group "Recipe06-01-rg" --template-file template.json --parameters parameters.json

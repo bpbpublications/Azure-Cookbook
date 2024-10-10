@@ -1,0 +1,4 @@
+requests 
+| where timestamp >ago(30m)
+| project timestamp,duration
+| render timechart 

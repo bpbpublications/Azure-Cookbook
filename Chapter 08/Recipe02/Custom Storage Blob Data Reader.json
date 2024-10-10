@@ -1,0 +1,26 @@
+{
+    "properties": {
+        "roleName": "Custom Storage Blob Data Reader",
+        "description": "",
+        "assignableScopes": [
+            "/subscriptions/02e4a7f0-e0bc-4ae8-8fa8-73f1686fb788/resourceGroups/Recipe08-02-rg"
+        ],
+        "permissions": [
+            {
+                "actions": [
+                    "Microsoft.Resources/resources/read",
+                    "Microsoft.Resources/subscriptions/resourceGroups/read",
+                    "Microsoft.Storage/storageAccounts/read",
+                    "Microsoft.Storage/storageAccounts/blobServices/read",
+                    "Microsoft.Storage/storageAccounts/blobServices/containers/read",
+                    "Microsoft.Storage/storageAccounts/blobServices/generateUserDelegationKey/action"
+                ],
+                "notActions": [],
+                "dataActions": [
+                    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read"
+                ],
+                "notDataActions": []
+            }
+        ]
+    }
+}

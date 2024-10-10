@@ -1,0 +1,14 @@
+# Define resource names and location
+resource_group_name="Recipe07-01-rg"
+location="northeurope"
+automation_account_name="Recipe07-01-aa"
+
+# Create resource group
+resourceGroupId=$(az group create --name $resource_group_name --location $location --query "id" -o tsv)
+
+# Create an Automation Account
+az config set extension.use_dynamic_install=yes_without_prompt
+az automation account create --name $automation_account_name --resource-group $resource_group_name --location $location --output none
+
+# Create the VM used in the runbook
+az vm create --resource-group $resource_group_name --name myVM --image Win2022AzureEditionCore --public-ip-sku Standard --admin-username azureuser --admin-password "Password123!" --location $location --size Standard_B1s --authentication-type password -o none

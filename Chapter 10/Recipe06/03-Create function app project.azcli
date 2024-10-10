@@ -1,0 +1,11 @@
+# Create the function app project
+func init --worker-runtime dotnet
+
+# Create a function called KeyRotator with the "timer trigger" template
+func new --name KeyRotator --template "Timer trigger"
+
+# Add packages for Azure Management SDK
+dotnet add package Azure.ResourceManager.Resources
+dotnet add package Azure.ResourceManager.AppService
+dotnet add package Azure.ResourceManager.CognitiveServices
+dotnet add package Azure.Identity

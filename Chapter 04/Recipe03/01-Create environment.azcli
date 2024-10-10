@@ -1,0 +1,15 @@
+# Define resource names and location
+resource_group_name="Recipe04-03-rg"
+location="northeurope"
+res_suffix=$RANDOM
+appservice_name=myapp$res_suffix
+appserviceplan_name=plan$res_suffix
+
+# Create resource group
+az group create --name $resource_group_name --location $location --query "{ResourceGroup:name}" -o table
+	
+# Create App Service Plan
+az appservice plan create --name $appserviceplan_name --resource-group $resource_group_name --sku S1 --location $location -o none
+
+# Create Web App
+az webapp create --name $appservice_name --resource-group $resource_group_name --plan $appserviceplan_name --runtime "dotnet:8" --query "{AppServiceName:name}" -o table

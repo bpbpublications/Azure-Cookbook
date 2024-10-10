@@ -1,0 +1,16 @@
+# Define resource names and location
+resource_group_name="Recipe08-02-rg"
+location="northeurope"
+res_suffix=$RANDOM
+storage_name=storage$res_suffix
+container_name='documents'
+
+# Create resource group
+az group create --name $resource_group_name --location $location --query "{ResourceGroup:name}" -o table
+
+# Create Storage Account
+az storage account create --name $storage_name --resource-group $resource_group_name --location $location --sku Standard_LRS --only-show-errors --query "{StorageName:name}" -o table
+
+# Create the 'documents' container in the Storage Account
+accountKey=$(az storage account keys list --account-name $storage_name --query "[0].value" --output tsv)
+az storage container create --name $container_name --account-name $storage_name --account-key $accountKey --only-show-errors -o none

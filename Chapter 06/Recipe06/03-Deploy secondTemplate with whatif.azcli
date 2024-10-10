@@ -1,0 +1,2 @@
+# Deploy the template with WhatIf
+az deployment group create --resource-group $resource_group_name --template-file secondTemplate.bicep --what-if --only-show-errors

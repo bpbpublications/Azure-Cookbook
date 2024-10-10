@@ -1,0 +1,5 @@
+# Retrieve the policy definition for a key
+az keyvault key rotation-policy show --name myEncKey --vault-name $keyvault_name
+
+# Update a policy definition for a key
+az keyvault key rotation-policy update --value path/policy.json --name myEncKey --vault-name $keyvault_name

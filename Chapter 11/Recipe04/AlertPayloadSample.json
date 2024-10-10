@@ -1,0 +1,60 @@
+{
+    "schemaId": "azureMonitorCommonAlertSchema",
+    "data": {
+        "essentials": {
+            "alertId": "/subscriptions/02xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx88/providers/Microsoft.AlertsManagement/alerts/8ab06b78-8cd2-5ca5-3b14-b66be76cf000",
+            "alertRule": "Monitor to Azure Functions",
+            "severity": "Sev4",
+            "signalType": "Activity Log",
+            "monitorCondition": "Fired",
+            "monitoringService": "Activity Log - Administrative",
+            "alertTargetIDs": [
+                "/subscriptions/02xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx88/resourcegroups/codemotionazurewebinar-rg/providers/microsoft.web/sites/feedmng-app"
+            ],
+            "configurationItems": [
+                "feedmng-app"
+            ],
+            "originAlertId": "c0a364b6-fd86-45c9-9cb4-09889d8a511d_0f28c83341341c22e6ae815c18bb0672",
+            "firedDateTime": "2023-10-20T16:32:22.7437147Z",
+            "description": "",
+            "essentialsVersion": "1.0",
+            "alertContextVersion": "1.0"
+        },
+        "alertContext": {
+            "authorization": {
+                "action": "Microsoft.Web/sites/stop/action",
+                "scope": "/subscriptions/02xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx88/resourceGroups/CodemotionAzureWebinar-rg/providers/Microsoft.Web/sites/FeedMng-app"
+            },
+            "channels": "Operation",
+            "claims": "{\"aud\":\"https://management.core.windows.net/\",\"iss\":\"https://sts.windows.net/04xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx83/\",\"iat\":\"1697818409\",\"nbf\":\"1697818409\",\"exp\":\"1697824093\",\"http://schemas.microsoft.com/claims/authnclassreference\":\"1\",\"aio\":\"AbQAS/8UAAAAG/p867TBEcQ6njHOxTNObNONqZjq9jOGYHzhenMZDiG5FIB5vptvpyGBarj0Gxned7QwC6qLbxoAeiyROsvHeRMirJy5YyoUW56KvT+dAF87TUznYuCeOHWuHMEh8eSBRJgH+AOeuF6udE8Vt9kLJqx9QlDnBXXlYhWBau0nKylYe0omPOr7pUtKWeIbgFKZXblYbJPB7oNuK/bj2xww7hoknnkk4WX7zkST/8wnp4A=\",\"altsecid\":\"5::1003BFFD96634CF9\",\"http://schemas.microsoft.com/claims/authnmethodsreferences\":\"fido,rsa\",\"appid\":\"c44b4083-3bb0-49c1-b47d-974e53cbdf3c\",\"appidacr\":\"2\",\"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\":\"mabonann@microsoft.com\",\"groups\":\"3d924c46-9dfd-4162-a0e6-ae0df32bb614,5efd6d50-1bf4-4b91-9a17-040ae1d86289,70440d60-22bc-4300-9f9d-f785ab9c4ff7\",\"http://schemas.microsoft.com/identity/claims/identityprovider\":\"https://sts.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/\",\"idtyp\":\"user\",\"ipaddr\":\"5.90.50.130\",\"name\":\"Massimo Bonanni\",\"http://schemas.microsoft.com/identity/claims/objectidentifier\":\"2127939d-f1d2-498f-9f72-ee7968206cda\",\"puid\":\"1003200226F1D756\",\"rh\":\"0.AX0A0NQDBB2Sp0W0QbJKCpJng0ZIf3kAutdPukPawfj2MBOcAPA.\",\"http://schemas.microsoft.com/identity/claims/scope\":\"user_impersonation\",\"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier\":\"vFaYgpTCW4QRO5L7hfgLJn8rtFVlzKxY4tY6lQ3cYIQ\",\"http://schemas.microsoft.com/identity/claims/tenantid\":\"04xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx83\",\"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name\":\"mabonann@microsoft.com\",\"uti\":\"b5rUE7TR6E6fUPmVT7BJAA\",\"ver\":\"1.0\",\"wids\":\"62e90394-69f5-4237-9190-012177145e10,58a13ea3-c632-46ae-9ee0-9c0d43cd7f3d,8424c6f0-a189-499e-bbd0-26c1753c96d4\",\"xms_cae\":\"1\",\"xms_tcdt\":\"1661782782\"}",
+            "caller": "******@********",
+            "correlationId": "39605572-8115-4bfa-8971-2567dbe09a41",
+            "eventSource": "Administrative",
+            "eventTimestamp": "2023-10-20T16:26:04.9648419+00:00",
+            "httpRequest": "{\"clientRequestId\":\"fa8e3768-064c-4458-9923-3f9309f3700f\",\"clientIpAddress\":\"5.90.50.130\",\"method\":\"POST\",\"url\":\"https://management.azure.com/subscriptions/02xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx88/resourceGroups/CodemotionAzureWebinar-rg/providers/Microsoft.Web/sites/FeedMng-app/stop?api-version=2018-11-01\"}",
+            "eventDataId": "c0a364b6-fd86-45c9-9cb4-09889d8a511d",
+            "level": "Informational",
+            "operationName": "Microsoft.Web/sites/stop/action",
+            "operationId": "28256a6e-cdbd-4f9b-b400-a66b26638405",
+            "properties": {
+                "statusCode": "OK",
+                "serviceRequestId": null,
+                "eventCategory": "Administrative",
+                "entity": "/subscriptions/02xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx88/resourceGroups/CodemotionAzureWebinar-rg/providers/Microsoft.Web/sites/FeedMng-app",
+                "message": "Microsoft.Web/sites/stop/action",
+                "hierarchy": "04xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx83/demosubscriptionsmg/02xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx88"
+            },
+            "status": "Succeeded",
+            "subStatus": "OK",
+            "tenantId": "04xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx83",
+            "submissionTimestamp": "2023-10-20T16:28:14+00:00",
+            "ReceivedTime": "2023-10-20T16:28:14+00:00",
+            "ingestionTime": "2023-10-20T16:28:18.4080821+00:00",
+            "Activity Log Event Description": ""
+        },
+        "customProperties": {
+            "CustomProperty1": "1",
+            "CustomProperty2": "2"
+        }
+    }
+}

@@ -1,0 +1,25 @@
+# Define resource names and location
+resource_group_name="Recipe10-06-rg"
+location="northeurope"
+res_suffix=$RANDOM
+cognitive_service_name=cogserv$res_suffix
+appservice_name=myapp$res_suffix
+appserviceplan_name=plan$appservice_name
+functionapp_name=funcapp$res_suffix
+functionapp_storage_name=${functionapp_name}store
+
+# Create resource group
+az group create --name $resource_group_name --location $location --query "{ResourceGroup:name}" -o table
+	
+# Create Cognitive Service account
+az cognitiveservices account create --name $cognitive_service_name --resource-group $resource_group_name --location $location --kind CognitiveServices --sku S0 --yes --query "{CognitiveServiceName:name}" -o table
+
+# Create App Service Plan
+az appservice plan create --name $appserviceplan_name --resource-group $resource_group_name --sku S1 --location $location -o none
+
+# Create Web App
+az webapp create --name $appservice_name --resource-group $resource_group_name --plan $appserviceplan_name --query "{AppServiceName:name}" -o table
+
+# Create Function app and storage
+az storage account create --name $functionapp_storage_name --resource-group $resource_group_name --location $location --sku Standard_LRS --kind StorageV2 --only-show-errors -o none
+az functionapp create --name $functionapp_name --resource-group $resource_group_name --storage-account $functionapp_storage_name --consumption-plan-location $location --runtime dotnet --runtime-version 6.0 --functions-version 4 --os-type Windows --disable-app-insights --query "{FunctionAppName:name}" -o table

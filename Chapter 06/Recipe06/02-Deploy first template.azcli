@@ -1,0 +1,2 @@
+# Deploy the template firstTemplate.bicep in the Resource Group
+az deployment group create --resource-group $resource_group_name --template-file firstTemplate.bicep --only-show-errors

@@ -1,0 +1,2 @@
+# Retrieve the keys of the Cognitive Service and show the values
+az cognitiveservices account keys list --name $cognitive_service_name --resource-group Recipe10-06-rg -o tsv

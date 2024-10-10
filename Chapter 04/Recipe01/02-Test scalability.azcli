@@ -1,0 +1,5 @@
+# Convert the file to unix format
+dos2unix MakeTimeBasedCalls.sh
+
+# Execute calls to the App Service for 10 minutes
+sh MakeTimeBasedCalls.sh https://<app servicename>.azurewebsites.net 600

@@ -1,0 +1,27 @@
+# Define resource names and location
+resource_group_name="Recipe11-01-rg"
+location="northeurope"
+res_suffix=$RANDOM
+appservice_name=myapp$res_suffix
+appserviceplan_name=plan$appservice_name
+loganalitycsws_name=laworkspace$res_suffix
+appinsights_name=appinsights$res_suffix
+
+# Configure Azure CLI to installing extensions without prompt
+az config set extension.use_dynamic_install=yes_without_prompt
+
+# Create resource group
+az group create --name $resource_group_name --location $location --query "{ResourceGroup:name}" -o table
+	
+# Create App Service Plan
+az appservice plan create --name $appserviceplan_name --resource-group $resource_group_name --sku F1 --location $location -o none
+
+# Create Web App
+az webapp create --name $appservice_name --resource-group $resource_group_name --plan $appserviceplan_name --query "{AppServiceName:name}" -o table
+
+# Create Log Analytics Workspace for Applicatio Insights
+loganalyticsws_id=$(az monitor log-analytics workspace create --resource-group $resource_group_name --name $loganalitycsws_name --location $location --query "id" -o tsv)
+
+# Create Application Insights resource
+az monitor app-insights component create --app $appinsights_name --location $location --kind web --resource-group $resource_group_name --application-type web --query "{ApplicationInsightsName:name}" -o table
+az monitor app-insights component update --app $appinsights_name --resource-group $resource_group_name --workspace $loganalyticsws_id -o none

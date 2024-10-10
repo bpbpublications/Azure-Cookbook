@@ -1,0 +1,10 @@
+# Define resource names and location
+resource_group_name="Recipe10-01-rg"
+location="northeurope"
+storage_account_name=mystorage$RANDOM
+
+# Create resource group
+az group create --name $resource_group_name --location $location
+	
+# Create Storage Account
+az storage account create --name $storage_account_name --resource-group $resource_group_name --location $location --sku Standard_LRS

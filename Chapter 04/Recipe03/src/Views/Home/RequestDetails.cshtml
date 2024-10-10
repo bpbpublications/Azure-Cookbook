@@ -1,0 +1,25 @@
+﻿@model src.Models.Home.RequestDetailsModel;
+
+@{
+    ViewData["Title"] = "Request Details";
+}
+
+<h1>RequestDetails</h1>
+
+<div>
+
+    <dl class="row table">
+        @foreach (var item in Model.Headers)
+        {
+            <dt class="col-sm-2">
+                @item.Key
+            </dt>
+            <dd class="col-sm-10">
+                @item.Value
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>

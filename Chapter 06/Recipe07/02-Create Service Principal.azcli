@@ -1,0 +1,8 @@
+# Retrieve the resource ID for the resource group and save it in a variable
+resource_group_id=$(az group show --name $resource_group_name --query id --output tsv)
+
+# Create the Service Principal for the GitHub Action with contributor role on respurce group and show info
+az ad sp create-for-rbac -n SP-Recipe06-07 --role Contributor --scopes $resource_group_id
+
+## Display the subscription ID
+az account show --query id --output tsv

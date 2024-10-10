@@ -1,0 +1,21 @@
+ENV_PREFIX="Recipe05-04"
+LOCATION="westeurope"
+RGNAME="$ENV_PREFIX-rg"
+
+# Check if the resource group exists
+exists=$(az group exists --name $RGNAME)
+
+if [ "$exists" = "false" ]; then
+    # Create the resource group
+    az group create --name $RGNAME --location $LOCATION
+fi
+
+## Create a container registry
+ACRNAME="recipe0504acr$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 9)"
+
+az acr create --resource-group $RGNAME --name $ACRNAME --sku standard --location $LOCATION --admin-enabled true
+
+## Create a docker file referencing a vulnerable base image. Then push it to the registry
+echo "FROM webgoat/webgoat" > dockerfile 
+
+az acr build --image sample/recipe05-04-app:v1 --registry $ACRNAME --file dockerfile .

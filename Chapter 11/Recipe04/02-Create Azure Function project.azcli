@@ -1,0 +1,6 @@
+# Create the function app project
+func init --worker-runtime dotnet
+
+# Create a function called AlertHandler with the "http trigger" template
+func new --name AlertHandler --template "HTTP trigger"
+

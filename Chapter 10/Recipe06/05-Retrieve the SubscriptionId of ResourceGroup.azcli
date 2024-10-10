@@ -1,0 +1,2 @@
+subscription_id=$(az group show --name Recipe10-06-rg --query "id" --output tsv | cut -d'/' -f3)
+echo "Subscription ID = $subscription_id"

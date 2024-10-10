@@ -1,0 +1,1 @@
+az storage account delete --name <StorageName> --resource-group Recipe10-01-rg --yes

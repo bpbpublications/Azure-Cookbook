@@ -1,0 +1,39 @@
+ENV_PREFIX="Recipe05-06"
+LOCATION="westeurope"
+RGNAME="$ENV_PREFIX-rg"
+VNET_NAME="$ENV_PREFIX-VNET"
+
+# Check if the resource group exists
+exists=$(az group exists --name $RGNAME)
+
+if [ "$exists" = "false" ]; then
+    # Create the resource group
+    az group create --name $RGNAME --location $LOCATION
+fi
+
+# Create the virtual network with its subnets
+az network vnet create -g $RGNAME -l $LOCATION -n $VNET_NAME --address-prefixes 10.0.0.0/20 -o none
+az network vnet subnet create -g $RGNAME --vnet-name $VNET_NAME -n nodes-subnet --address-prefixes 10.0.0.0/24 -o none
+az network vnet subnet create -g $RGNAME --vnet-name $VNET_NAME -n pods-subnet --address-prefixes 10.0.10.0/23 -o none
+
+# Create the AKS cluster
+CLUSTER_NAME="$ENV_PREFIX-AKS"
+
+POD_SUBNET_ID=$(az network vnet subnet show -g $RGNAME --vnet-name $VNET_NAME -n pods-subnet --query id -o tsv)
+NODE_SUBNET_ID=$(az network vnet subnet show -g $RGNAME --vnet-name $VNET_NAME -n nodes-subnet --query id -o tsv)
+
+az aks create -n $CLUSTER_NAME -g $RGNAME -l $LOCATION \
+    --max-pods 50 \
+    --node-count 5 \
+    --network-plugin azure \
+    --vnet-subnet-id $NODE_SUBNET_ID \
+    --pod-subnet-id $POD_SUBNET_ID \
+    --service-cidr 192.168.0.0/22 \
+    --dns-service-ip 192.168.0.100 \
+    --enable-addons monitoring \
+    --generate-ssh-keys
+
+# Connect to the cluster
+az aks get-credentials -n $CLUSTER_NAME -g $RGNAME
+
+kubectl get pods -n default -o wide

@@ -1,0 +1,2 @@
+# Disable public endpoint for the App Service
+az resource update --resource-group $resource_group_name --name $appservice_name --resource-type "Microsoft.Web/sites" --set properties.publicNetworkAccess=Enabled

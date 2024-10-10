@@ -1,0 +1,5 @@
+# Create dotnet web app
+dotnet new mvc
+
+ # Adding gitignore file
+dotnet new gitignore

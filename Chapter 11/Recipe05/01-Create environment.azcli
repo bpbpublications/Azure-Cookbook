@@ -1,0 +1,25 @@
+# Define resource names and location
+resource_group_name="Recipe11-05-rg"
+location="northeurope"
+res_suffix=$RANDOM
+datastorage_name=store$res_suffix
+diagnosticstorage_name=diag$res_suffix
+diagnosticworkspace_name=diagws$res_suffix
+diagnosticeventhubns_name=evhub$res_suffix
+diagnosticeventhub_name=diagnostic
+
+# Create resource group
+az group create --name $resource_group_name --location $location --query "{ResourceGroup:name}" -o table
+
+# Create the storage account for data
+az storage account create --name $datastorage_name --resource-group $resource_group_name --location $location --sku Standard_LRS --query "{DataStorageName:name}" -o table
+
+# Create the storage account for diagnostics
+az storage account create --name $diagnosticstorage_name --resource-group $resource_group_name --location $location --sku Standard_LRS --query "{DiagnosticStorageName:name}" -o table
+
+# Create the diagnostic workspace
+az monitor log-analytics workspace create --resource-group $resource_group_name --workspace-name $diagnosticworkspace_name --location $location --query "{DiagnosticWorkspaceName:name}" -o table
+
+# Create the diagnostic event hub
+az eventhubs namespace create --name $diagnosticeventhubns_name --resource-group $resource_group_name --location $location --query "{DiagnosticEventHubNameSpace:name}" -o table
+az eventhubs eventhub create --name $diagnosticeventhub_name --namespace-name $diagnosticeventhubns_name --resource-group $resource_group_name --query "{DiagnostivEventHubName:name}" -o table

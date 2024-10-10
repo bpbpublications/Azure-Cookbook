@@ -1,0 +1,8 @@
+# Add all files to git
+git add -A
+
+# Commit with message
+git commit -m "First commit"
+
+# Push to remote
+git push

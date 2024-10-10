@@ -1,0 +1,17 @@
+# Define resource names and location
+resource_group_name="Recipe05-02-rg"
+location="northeurope"
+res_suffix=$RANDOM
+appserviceplan_name=plan$res_suffix
+container_registry_name=acr$res_suffix
+
+# Create resource group
+az group create --name $resource_group_name --location $location --query "{ResourceGroup:name}" -o table
+	
+# Create App Service Plan
+az appservice plan create --name $appserviceplan_name --resource-group $resource_group_name --sku S1 --location $location --is-linux -o none
+
+# Create an Azure container registry
+acr_login_server=$(az acr create --resource-group $resource_group_name --name $container_registry_name --sku Basic --admin-enabled true --query loginServer -o tsv)
+
+echo "ACR server = ${acr_login_server}"

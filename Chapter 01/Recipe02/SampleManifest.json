@@ -1,0 +1,82 @@
+{
+	"destinationContainer" : "inventory",
+	"endpoint" : "https://storage10420.blob.core.windows.net",
+	"files" : 
+	[
+		{
+			"blob" : "2023/12/05/07-05-19/inventoryRule/inventoryRule.csv",
+			"size" : 1484
+		}
+	],
+	"inventoryCompletionTime" : "2023-12-05T07:31:23Z",
+	"inventoryStartTime" : "2023-12-05T07:05:19Z",
+	"ruleDefinition" : 
+	{
+		"filters" : 
+		{
+			"blobTypes" : 
+			[
+				"blockBlob"
+			],
+			"excludePrefix" : [],
+			"includeBlobVersions" : false,
+			"includeDeleted" : false,
+			"includeSnapshots" : false,
+			"prefixMatch" : 
+			[
+				"documents/"
+			]
+		},
+		"format" : "csv",
+		"objectType" : "blob",
+		"schedule" : "daily",
+		"schemaFields" : 
+		[
+			"Name",
+			"Creation-Time",
+			"Last-Modified",
+			"Etag",
+			"Content-Length",
+			"Content-Type",
+			"Content-Encoding",
+			"Content-Language",
+			"Content-CRC64",
+			"Content-MD5",
+			"Cache-Control",
+			"Content-Disposition",
+			"BlobType",
+			"AccessTier",
+			"AccessTierChangeTime",
+			"AccessTierInferred",
+			"Metadata",
+			"LastAccessTime",
+			"LeaseStatus",
+			"LeaseState",
+			"LeaseDuration",
+			"ServerEncrypted",
+			"CustomerProvidedKeySha256",
+			"RehydratePriority",
+			"ArchiveStatus",
+			"EncryptionScope",
+			"CopyId",
+			"CopyStatus",
+			"CopySource",
+			"CopyProgress",
+			"CopyCompletionTime",
+			"CopyStatusDescription",
+			"ImmutabilityPolicyUntilDate",
+			"ImmutabilityPolicyMode",
+			"LegalHold",
+			"Tags",
+			"TagCount"
+		]
+	},
+	"ruleName" : "inventoryRule",
+	"status" : "Succeeded",
+	"summary" : 
+	{
+		"objectCount" : 5,
+		"totalObjectSize" : 14274
+	},
+	"version" : "1.0"
+}

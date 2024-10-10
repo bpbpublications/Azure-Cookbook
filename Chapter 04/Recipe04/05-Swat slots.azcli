@@ -1,0 +1,5 @@
+# Swap production and staging slots
+az webapp deployment slot swap --name $appservice_name  --resource-group $resource_group_name --slot staging --target-slot production
+
+# Make calls to show production content
+sh MakeTimeBasedCalls.sh <app service url>

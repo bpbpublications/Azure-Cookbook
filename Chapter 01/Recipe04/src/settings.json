@@ -1,0 +1,14 @@
+{
+    "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "SubscriptionId": "",
+    "ManagedIdentityId": "",
+    "ConnectionStringSettingName": "StorageConnectionString",
+    "StorageName": "",
+    "AppServiceName": "",
+    "ResourceGroupName": "Recipe10-06-rg",
+    "RotationTimer": "0 */2 * * * *"
+  }
+}

@@ -1,0 +1,1 @@
+az storage account or-policy create -g <resource group> -n <storage Account> --policy <JSON Path>

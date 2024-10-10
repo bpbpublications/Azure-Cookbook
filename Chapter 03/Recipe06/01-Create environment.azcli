@@ -1,0 +1,19 @@
+# Define resource names and location
+resource_group_name="Recipe03-06-rg"
+location="northeurope"
+network_name="myVnet"
+scripts_storage_name=scriptstore$RANDOM
+
+# Create resource group
+az group create --name $resource_group_name --location $location --query "{ResourceGroup:name}" -o table
+	
+# Create a virtual network
+az network vnet create --resource-group $resource_group_name --name $network_name --location $location --address-prefix 10.0.0.0/16 -o none
+az network vnet subnet create --resource-group $resource_group_name --vnet-name $network_name --name default --address-prefix 10.0.0.0/24 -o none
+
+# Create Storage Account for scripts
+az storage account create --name $scripts_storage_name --resource-group $resource_group_name --location $location --sku Standard_LRS --only-show-errors --query "{ScriptsStorageName:name}" -o table
+
+# Create "scripts" container in the  Storage Account
+accountKey=$(az storage account keys list --account-name $scripts_storage_name --query "[0].value" --output tsv)
+az storage container create --name scripts --account-name $scripts_storage_name --account-key $accountKey --only-show-errors -o none

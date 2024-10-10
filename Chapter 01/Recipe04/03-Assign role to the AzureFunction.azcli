@@ -1,0 +1,8 @@
+# Retrieve the Storage Account resource id  
+storage_id=$(az storage account show --resource-group $resource_group_name --name $storage_name --query id --output tsv)
+
+# retrieve the function app identity id
+functionapp_identity=$(az functionapp identity show --name $functionapp_name --resource-group $resource_group_name --query "principalId" -o tsv)
+
+# Assign the role Storage Blob Data Contributor to the function on the storage
+az role assignment create --role "Storage Blob Data Contributor" --assignee $functionapp_identity --scope $storage_id

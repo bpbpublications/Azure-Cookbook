@@ -1,0 +1,9 @@
+domain_name="<your domain here>"
+user_name="ChefAssistant"
+user_password=$(tr -dc 'A-Za-z0-9!@#$%^&' </dev/urandom | head -c 12)
+user_principal_name="${user_name}@${domain_name}"
+
+az ad user create --display-name $user_name --password $user_password  --user-principal-name $user_principal_name --output none 
+
+echo "User : "$user_principal_name
+echo "Password : "$user_password 

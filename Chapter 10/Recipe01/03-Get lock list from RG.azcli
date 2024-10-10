@@ -1,0 +1,1 @@
+az lock list --resource-group Recipe10-01-rg

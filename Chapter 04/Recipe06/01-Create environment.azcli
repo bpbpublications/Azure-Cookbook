@@ -1,0 +1,25 @@
+# Define resource names and location
+resource_group_name="Recipe04-06-rg"
+location="northeurope"
+res_suffix=$RANDOM
+appservice_name=myapp$res_suffix
+appserviceplan_name=plan$res_suffix
+network_name="myVNet"
+
+# Create resource group
+az group create --name $resource_group_name --location $location --query "{ResourceGroup:name}" -o table
+	
+# Create App Service Plan
+az appservice plan create --name $appserviceplan_name --resource-group $resource_group_name --sku S1 --location $location -o none
+
+# Create Web App
+az webapp create --name $appservice_name --resource-group $resource_group_name --plan $appserviceplan_name  --query "{AppServiceName:name}" -o table
+
+# Create VNet
+az network vnet create --resource-group $resource_group_name --name $network_name --location $location --address-prefix 10.0.0.0/16 -o none
+az network vnet subnet create --resource-group $resource_group_name --vnet-name $network_name --name FrontEnd --address-prefix 10.0.0.0/24 -o none
+az network vnet subnet create --resource-group $resource_group_name --vnet-name $network_name --name BackEnd --address-prefix 10.0.1.0/24 -o none
+az network vnet subnet create --resource-group $resource_group_name --vnet-name $network_name --name Other  --address-prefix 10.0.2.0/24 -o none
+
+# Create a VM in Other subnet
+az vm create --resource-group $resource_group_name --location $location --name VM1 --vnet-name $network_name --subnet Other --image Ubuntu2204 --admin-username azureuser --admin-password Pa55w.rd1234 -o none

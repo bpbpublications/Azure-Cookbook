@@ -1,0 +1,1 @@
+az lock create --lock-type CanNotDelete --name LockDelRG --resource-group Recipe10-01-rg

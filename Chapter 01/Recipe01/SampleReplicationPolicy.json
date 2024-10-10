@@ -1,0 +1,17 @@
+{
+  "id": "/subscriptions/02xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx88/resourceGroups/Recipe01-01-rg/providers/Microsoft.Storage/storageAccounts/primarystorageXXXX/objectReplicationPolicies/3d13dc6f-596c-48ee-9f53-cdf35cc56fb4",
+  "name": "3d13dc6f-596c-48ee-9f53-cdf35cc56fb4",
+  "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+  "properties": {
+    "policyId": "3d13dc6f-596c-48ee-9f53-cdf35cc56fb4",
+    "sourceAccount": "/subscriptions/02xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx88/resourceGroups/Recipe01-01-rg/providers/Microsoft.Storage/storageAccounts/primarystorageXXXX",
+    "destinationAccount": "/subscriptions/02xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx88/resourceGroups/Recipe01-01-rg/providers/Microsoft.Storage/storageAccounts/secondarystorageXXXX",
+    "rules": [
+      {
+        "ruleId": "2e531bb0-de7d-46a6-a072-a939aa9f59a1",
+        "sourceContainer": "sourcecontainer",
+        "destinationContainer": "destinationcontainer"
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-apache-deployment
+spec:
+  replicas: 20
+  selector:
+    matchLabels:
+      app: hello-world-apache
+  template:
+    metadata:
+      labels:
+        app: hello-world-apache
+    spec:
+      containers:
+      - name: hello-world-container
+        image: httpd:2.4
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 250m
+            memory: 250Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-apache-service
+spec:
+  selector:
+    app: hello-world-apache
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer

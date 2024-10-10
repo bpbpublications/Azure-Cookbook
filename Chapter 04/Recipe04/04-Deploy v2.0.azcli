@@ -1,0 +1,2 @@
+# Deploy App Service zip file
+az webapp deploy --resource-group $resource_group_name --name $appservice_name --slot staging --src-path v2.zip --type zip

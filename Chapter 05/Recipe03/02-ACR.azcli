@@ -1,0 +1,26 @@
+ENV_PREFIX="Recipe05-03"
+LOCATION="westeurope"
+RGNAME="$ENV_PREFIX-rg"
+
+## Create a container registry
+ACRNAME="recipe0503acr$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 9)"
+
+az acr create --resource-group $RGNAME --name $ACRNAME --sku Basic --location $LOCATION --admin-enabled true
+
+## Create a docker file for the green environment and push it to the registry
+cat > dockerfile_green <<- EOM
+FROM httpd:2.4
+RUN echo "<H1>This is the green environment</H1>" > /usr/local/apache2/htdocs/index.html
+EXPOSE 80
+EOM
+
+az acr build --image sample/recipe05-03-app:green --registry $ACRNAME --file dockerfile_green .
+
+## Create a docker file for the blue environment and push it to the registry
+cat > dockerfile_blue <<- EOM
+FROM httpd:2.4
+RUN echo "<H1>This is the blue environment</H1>" > /usr/local/apache2/htdocs/index.html
+EXPOSE 80
+EOM
+
+az acr build --image sample/recipe05-03-app:blue --registry $ACRNAME --file dockerfile_blue .

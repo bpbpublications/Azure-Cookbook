@@ -1,0 +1,8 @@
+# Retrieve the Identity ID of the automation account 
+saID=$(az automation account show --name $automation_account_name --resource-group $resource_group_name --query "identity.principalId" --output tsv)
+
+# Assign 'DevTest Labs User' role to automation account in the resource group 
+az role assignment create --assignee $saID --role "DevTest Labs User" --scope $resourceGroupId -o none
+
+# Assign 'Reader' role to automation account in the resource group 
+az role assignment create --assignee $saID --role "Reader" --scope $resourceGroupId -o none

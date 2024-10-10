@@ -1,0 +1,6 @@
+# Define resource names and location
+resource_group_name="Recipe09-01-rg"
+location="northeurope"
+
+# Create resource group
+az group create --name $resource_group_name --location $location

@@ -1,0 +1,4 @@
+appservice_name=myapp$res_suffix
+container_image_name=$acr_login_server/recipe05-02-app:v1.0
+# Create Web App
+az webapp create --name $appservice_name --resource-group $resource_group_name --plan $appserviceplan_name ----deployment-container-image-name $container_image_name --query "{AppServiceName:name}" -o table

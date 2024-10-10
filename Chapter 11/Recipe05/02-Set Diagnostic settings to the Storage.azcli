@@ -1,0 +1,8 @@
+# Retrieve Storage Account Id
+datastorage_id=$(az storage account show --resource-group $resource_group_name --name $datastorage_name --query id --output tsv)
+
+# Retrieve Log Analytics Workspace Id
+logAnalyticsWorkspaceId=$(az monitor log-analytics workspace show --resource-group $resource_group_name --workspace-name $diagnosticworkspace_name --query id --output tsv) 
+
+# Add diagnostic setting to storage account
+az monitor diagnostic-settings create --name Diagnostic2Workspace --resource $datastorage_id --metrics '[{"category": "AllMetrics","enabled": true}]' --workspace $logAnalyticsWorkspaceId 

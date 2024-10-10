@@ -1,0 +1,11 @@
+# Define resource names and location
+resource_group_name="Recipe03-04-rg"
+location="northeurope"
+network_name="myVnet"
+
+# Create resource group
+az group create --name $resource_group_name --location $location --query "{ResourceGroup:name}" -o table
+	
+# Create a virtual network
+az network vnet create --resource-group $resource_group_name --name $network_name --location $location --address-prefix 10.0.0.0/16 -o none
+az network vnet subnet create --resource-group $resource_group_name --vnet-name $network_name --name FrontEndSubnet --address-prefix 10.0.0.0/24 -o none
